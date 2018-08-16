@@ -234,6 +234,23 @@ namespace GenericBot.CommandModules
             };
 
             FunCommands.Add(redact);
+            
+            Command height = new Command("height");
+            height.Description = "Converts a height in inches to a height in Poppies";
+            height.ToExecute += async (client, msg, parameters) =>
+            {
+                if(parameters.Empty() || parameters.Count > 1)
+                {
+                    await msg.ReplyAsync("Input improperly formatted");
+                    return;
+                }
+                int inches = Int32.Parse(parameters[0]);
+                double poppies = inches / 65.0;
+                
+                await msg.ReplyAsync($"{poppies} Poppies!");
+            }
+            
+            FunCommands.Add(height);
 
             return FunCommands;
         }
